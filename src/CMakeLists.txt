@@ -1,1 +1,11 @@
 add_executable(main main.cpp)
+
+if ( CMAKE_CXX_COMPILER_ID MATCHES "Clang|AppleClang|GNU" )
+    target_compile_options( main PRIVATE -Wall -Wextra -Wunreachable-code -Wpedantic)
+endif()
+if ( CMAKE_CXX_COMPILER_ID MATCHES "Clang" )
+    target_compile_options( main PRIVATE -Wweak-vtables -Wexit-time-destructors -Wglobal-constructors -Wmissing-noreturn )
+endif()
+if ( CMAKE_CXX_COMPILER_ID MATCHES "MSVC" )
+    target_compile_options( main PRIVATE /W4 /w44265 /w44061 /w44062 )
+endif()
